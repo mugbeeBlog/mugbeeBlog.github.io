@@ -1,8 +1,27 @@
 {
+  // ESLint Flat Config
+  "eslint.useFlatConfig": true,
+  "eslint.workingDirectories": [{ "mode": "auto" }],
+  "eslint.validate": ["javascript", "typescript", "astro"],
+
+  // Fix on Save
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit",
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll.stylelint": "explicit"
+  },
+
   // Astro
   "files.associations": {
     "*.astro": "astro"
   },
+
+  // Prettier
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+  // Stylelint
+  "stylelint.validate": ["css", "scss", "html", "astro"],
+  "stylelint.configFile": "stylelint.config.mjs",
 
   // Editor
   "editor.insertSpaces": true,
@@ -22,5 +41,5 @@
   },
 
   // cSpell
-  "cSpell.words": ["mugbeeblog", "OAOO", "txcode"]
+  "cSpell.words": ["MICROCMS", "OAOO"]
 }
