@@ -26,7 +26,10 @@ jobs:
 
       - run: npm ci
 
-      - run: npm run build
+      - name: Build Astro site
+        env:
+          PUBLIC_GTM_ID: ${{ secrets.PUBLIC_GTM_ID }}
+        run: npm run build
 
       - uses: actions/upload-pages-artifact@v3
         with:
