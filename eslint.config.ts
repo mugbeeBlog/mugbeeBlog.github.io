@@ -17,10 +17,10 @@ export default defineConfig([
 
   js.configs.recommended,
 
-  ...tseslint.configs.strict.map((config) => ({
-    ...config,
+  {
     files: ["**/*.{ts,mts,cts}"],
-  })),
+    extends: [...tseslint.configs.strict],
+  },
 
   {
     files: ["**/*.{ts,mts,cts}"],
