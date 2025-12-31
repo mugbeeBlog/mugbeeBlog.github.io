@@ -7,10 +7,14 @@ mugbeeBlog
 │   ├── data-store.json
 │   ├── settings.json
 │   └── types.d.ts
+├── .gemini
+│   ├── config.yaml
+│   └── styleguide.md
 ├── .git
 ├── .github
-│   └── workflows
-│       └── deploy.yml
+│   ├── workflows
+│   │   └── deploy.yml
+│   └── pull_request_template.md
 ├── .vscode
 │   ├── extensions.json
 │   ├── launch.json
@@ -22,13 +26,21 @@ mugbeeBlog
 ├── public
 │   └── favicon.svg
 ├── src
-│   └── pages
-│       └── index.astro
+│   ├── pages
+│   │   └── index.astro
+│   └── styles
+│       └── settings
+│           └── global.scss
+├── .browserslistrc
 ├── .gitignore
 ├── .nojekyll
+├── .prettierrc.mjs
 ├── README.md
 ├── astro.config.mjs
 ├── changelog.config.cjs
+├── eslint.config.ts
 ├── package-lock.json
 ├── package.json
+├── postcss.config.mjs
+├── stylelint.config.mjs
 └── tsconfig.json
