@@ -4,7 +4,7 @@ import { site } from '../data/constants';
 const { title, description } = Astro.props;
 
 const GTM_ID = import.meta.env.PUBLIC_GTM_ID;
-const canonicalUrl = import.meta.env.SITE;
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 
 const siteTitle = site.title;
 const siteDescription = site.description;
@@ -35,7 +35,7 @@ const pageDescription = description ?? siteDescription;
 <meta name="generator" content={Astro.generator} />
 
 <!-- Canonical -->
-<link rel="canonical" href={canonicalUrl} />
+<link rel="canonical" href={canonicalUrl.href} />
 
 <!-- Primary Meta -->
 <title>{pageTitle}</title>
