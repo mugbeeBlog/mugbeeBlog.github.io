@@ -1,0 +1,26 @@
+{
+  // Astro
+  "files.associations": {
+    "*.astro": "astro"
+  },
+
+  // Editor
+  "editor.insertSpaces": true,
+  "diffEditor.codeLens": true,
+  "editor.quickSuggestions": {
+    "other": "on",
+    "comments": "on",
+    "strings": "on"
+  },
+
+  // Emmet
+  "emmet.includeLanguages": {
+    "astro": "html"
+  },
+  "emmet.variables": {
+    "lang": "ja"
+  },
+
+  // cSpell
+  "cSpell.words": []
+}
