@@ -1,0 +1,50 @@
+---
+import { site } from '../data/constants';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+const props = Astro.props as Props;
+
+const GTM_ID = import.meta.env.PUBLIC_GTM_ID;
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+
+const siteTitle = site.title;
+const siteDescription = site.description;
+
+const pageTitle = props.title ? `${props.title} | ${siteTitle}` : siteTitle;
+const pageDescription = props.description ?? siteDescription;
+---
+
+<!-- Google Tag Manager -->
+{GTM_ID && (
+  <script type="text/partytown" define:vars={{ GTM_ID }}>
+    (function (w, d, s, l, i) {
+      w[l] = w[l] || [];
+      w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+      const f = d.getElementsByTagName(s)[0];
+      const j = d.createElement(s);
+      const dl = l !== 'dataLayer' ? '&l=' + l : '';
+      j.async = true;
+      j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+      f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', GTM_ID);
+  </script>
+)}
+
+<!-- Base Meta -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width" />
+<meta name="generator" content={Astro.generator} />
+
+<!-- Canonical -->
+<link rel="canonical" href={canonicalUrl.href} />
+
+<!-- Primary Meta -->
+<title>{pageTitle}</title>
+<meta name="description" content={pageDescription} />
+
+<!-- Icons -->
+<link rel="icon" href="/favicon.ico" sizes="32x32" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
