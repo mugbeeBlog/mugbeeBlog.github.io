@@ -1,8 +1,9 @@
 // @ts-check
 import { defineConfig } from "astro/config";
+import partytown from "@astrojs/partytown";
 
 export default defineConfig({
-  site: "https://mugbeeBlog.github.io",
+  site: "https://mugbee2025.github.io",
   vite: {
     server: {
       watch: {
@@ -10,4 +11,11 @@ export default defineConfig({
       },
     },
   },
+  integrations: [
+    partytown({
+      config: {
+        forward: ["dataLayer.push", "gtm.push"],
+      },
+    }),
+  ],
 });
