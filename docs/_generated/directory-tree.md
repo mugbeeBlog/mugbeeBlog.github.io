@@ -25,6 +25,10 @@ mugbeeBlog
 │       ├── directory-tree.md
 │       └── wsl-extensions.txt
 ├── public
+│   ├── icons
+│   │   ├── github.svg
+│   │   ├── x.svg
+│   │   └── youtube.svg
 │   ├── images
 │   │   └── no-images.png
 │   ├── apple-touch-icon.png
@@ -32,7 +36,12 @@ mugbeeBlog
 ├── src
 │   ├── components
 │   │   ├── ArticleCard.astro
-│   │   └── BaseHead.astro
+│   │   ├── BaseHead.astro
+│   │   ├── Footer.astro
+│   │   ├── Header.astro
+│   │   ├── HeaderNav.astro
+│   │   ├── Pagination.astro
+│   │   └── SocialLinks.astro
 │   ├── content
 │   │   ├── config.ts
 │   │   └── microcms.ts
@@ -41,12 +50,16 @@ mugbeeBlog
 │   ├── layouts
 │   │   └── BaseLayout.astro
 │   ├── pages
+│   │   ├── page
+│   │   │   └── [...page].astro
+│   │   ├── [...slug].astro
 │   │   └── index.astro
 │   ├── styles
 │   │   └── settings
 │   │       └── global.scss
 │   └── utils
-│       └── date.ts
+│       ├── date.ts
+│       └── sortBlogs.ts
 ├── .browserslistrc
 ├── .env
 ├── .gitignore
