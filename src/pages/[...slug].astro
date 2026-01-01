@@ -1,27 +1,33 @@
 ---
 import { getCollection } from 'astro:content';
 import { Image } from 'astro:assets';
-import BaseLayout from '../layouts/BaseLayout.astro';
+import PageLayout from '../layouts/PageLayout.astro';
 import Taxonomy from '../components/Taxonomy.astro';
 import { formatJPDate, toISODateTime } from '../utils/date';
+import Recommend from '../components/Recommend.astro';
 
 export async function getStaticPaths() {
   const blogs = await getCollection('blogs');
 
   return blogs.map((blog) => ({
     params: { slug: blog.data.slug },
-    props: { blog },
+    props: { blog, blogs },
   }));
 }
 
-const { blog } = Astro.props;
+const { blog, blogs } = Astro.props;
 
 const publishedDate = formatJPDate(blog.data.publishedAt);
 const updatedDate = formatJPDate(blog.data.updatedAt);
 const thumbnailUrl = blog.data.thumbnail?.url ?? '/images/no-images.png';
+
+const pickupIds = blog.data.pickup ?? [];
+const pickupBlogs = pickupIds
+  .map((p) => blogs.find((b) => b.id === p.id))
+  .filter((b): b is (typeof blogs)[number] => Boolean(b));
 ---
 
-<BaseLayout title={blog.data.title} description={blog.data.description}>
+<PageLayout title={blog.data.title} description={blog.data.description}>
   <main>
     <Image
       src={thumbnailUrl}
@@ -54,5 +60,7 @@ const thumbnailUrl = blog.data.thumbnail?.url ?? '/images/no-images.png';
     <Taxonomy category={blog.data.category} tags={blog.data.tags} />
 
     <div set:html={blog.data.content} />
+
+    <Recommend slot="recommend" contents={pickupBlogs} title="ピックアップ" />
   </main>
-</BaseLayout>
+</PageLayout>
