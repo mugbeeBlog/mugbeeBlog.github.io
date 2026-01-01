@@ -56,11 +56,3 @@ const thumbnailUrl = blog.data.thumbnail?.url ?? '/images/no-images.png';
     <div set:html={blog.data.content} />
   </main>
 </BaseLayout>
-
-<style is:global>
-  img {
-    /* TODO: 後に削除 */
-    width: 10%;
-    height: auto;
-  }
-</style>
