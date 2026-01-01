@@ -1,38 +1,20 @@
 ---
-import { getCollection, type CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
 import type { GetStaticPathsOptions } from 'astro';
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import ArticleCard from '../../../../components/ArticleCard.astro';
 import Pagination from '../../../../components/Pagination.astro';
 import { pagination } from '../../../../data/constants';
+import { groupPostsByTaxonomy } from '../../../../utils/taxonomy';
 
 export const getStaticPaths = async ({ paginate }: GetStaticPathsOptions) => {
-  const posts = (await getCollection('blogs')).sort(
-    (a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime()
-  );
-
-  const categoryMap = new Map<
-    string,
-    { name: string; slug: string; posts: CollectionEntry<'blogs'>[] }
-  >();
-
-  posts.forEach((post) => {
-    const categories = post.data.category ?? [];
-    categories.forEach((cat) => {
-      const slug = cat.slug ?? cat.id;
-      if (!categoryMap.has(slug)) {
-        categoryMap.set(slug, { name: cat.name, slug, posts: [] });
-      }
-      categoryMap.get(slug)?.posts.push(post);
-    });
-  });
+  const posts = await getCollection('blogs');
+  const categoryMap = groupPostsByTaxonomy(posts, (post) => post.data.category);
 
   const paths = [];
 
   for (const { name, slug, posts } of categoryMap.values()) {
-    const typedPosts = posts as CollectionEntry<'blogs'>[];
-
-    const paginated = paginate(typedPosts, {
+    const paginated = paginate(posts, {
       pageSize: pagination.pageSize,
       params: { slug },
       props: { name },
