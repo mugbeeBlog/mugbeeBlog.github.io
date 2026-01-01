@@ -1,8 +1,26 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ArticleCard from '../components/ArticleCard.astro';
 import { site } from '../data/constants.ts';
+
+const blogs = (await getCollection('blogs')).sort((a, b) => {
+  const dateA = a.data.publishedAt?.getTime() ?? 0;
+  const dateB = b.data.publishedAt?.getTime() ?? 0;
+  return dateB - dateA || a.data.slug.localeCompare(b.data.slug);
+});
 ---
 
-<BaseLayout description={site.description}>
-  <h1>Astro</h1>
+<BaseLayout title={site.title} description={site.description}>
+  <main>
+    <ArticleCard blogs={blogs} />
+  </main>
 </BaseLayout>
+
+<style is:global>
+  img {
+    /* TODO: 後に削除 */
+    width: 10%;
+    height: auto;
+  }
+</style>
