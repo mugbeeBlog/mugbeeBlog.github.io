@@ -2,6 +2,7 @@
 import '../styles/settings/global.scss';
 
 import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
 
 const GTM_ID = import.meta.env.PUBLIC_GTM_ID;
 const { title, description } = Astro.props;
@@ -26,6 +27,7 @@ const { title, description } = Astro.props;
         </noscript>
       )
     }
+    <Header />
 
     <slot />
   </body>
