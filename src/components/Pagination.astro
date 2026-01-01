@@ -1,0 +1,63 @@
+---
+interface Props {
+  currentPage: number;
+  lastPage: number;
+  basePath: string;
+}
+
+const { currentPage, lastPage, basePath } = Astro.props;
+
+const MAX_PAGES = 7;
+
+const getPages = (): Array<number | 'dots'> => {
+  if (lastPage <= MAX_PAGES) {
+    return Array.from({ length: lastPage }, (_, i) => i + 1);
+  }
+
+  const pages: Array<number | 'dots'> = [1];
+  const start = Math.max(2, currentPage - 1);
+  const end = Math.min(lastPage - 1, currentPage + 1);
+
+  if (start > 2) pages.push('dots');
+
+  for (let i = start; i <= end; i++) {
+    pages.push(i);
+  }
+
+  if (end < lastPage - 1) pages.push('dots');
+
+  pages.push(lastPage);
+  return pages;
+};
+
+const getHref = (page: number): string => {
+  if (page === 1) {
+    return basePath === '/page' ? '/' : `${basePath}/`;
+  }
+  return `${basePath}/${page}/`;
+};
+
+const pages = getPages();
+---
+
+<nav>
+  <ul>
+    {
+      pages.map((page) =>
+        page === 'dots' ? (
+          <li>
+            <span>…</span>
+          </li>
+        ) : (
+          <li>
+            {page === currentPage ? (
+              <span aria-current="page">{page}</span>
+            ) : (
+              <a href={getHref(page)}>{page}</a>
+            )}
+          </li>
+        )
+      )
+    }
+  </ul>
+</nav>
