@@ -1,0 +1,25 @@
+---
+import { site } from '../data/constants';
+import SocialLinks from './SocialLinks.astro';
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer>
+  <button type="button" id="page-top-btn"> ▲ ページ上部へ ▲ </button>
+
+  <div class="social-links">
+    <SocialLinks />
+  </div>
+
+  <small>
+    &copy; {currentYear}
+    <a href="/">{site.title}</a>. All rights reserved.
+  </small>
+</footer>
+
+<script>
+  document.getElementById('page-top-btn')?.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>

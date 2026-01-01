@@ -16,3 +16,7 @@ export function formatJPDate(date: Date): string {
 
   return `${formatted}(${weekday})`;
 }
+
+export function toISODateTime(date: Date): string {
+  return date.toISOString();
+}

@@ -1,0 +1,16 @@
+---
+import { site } from '../data/constants';
+import HeaderNav from './HeaderNav.astro';
+
+const pathname = Astro.url.pathname;
+const isTop = pathname === '/';
+const TitleTag = isTop ? 'h1' : 'p';
+---
+
+<header>
+  <TitleTag class="title">
+    <a href="/">{site.title}</a>
+  </TitleTag>
+
+  <HeaderNav />
+</header>

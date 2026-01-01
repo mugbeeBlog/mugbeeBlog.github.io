@@ -1,0 +1,36 @@
+---
+const links = [
+  {
+    href: 'https://github.com/mugbee2025/mugbee2025.github.io',
+    title: 'GitHub',
+    icon: '/icons/github.svg',
+    alt: 'GitHub',
+  },
+  {
+    href: 'https://www.youtube.com/channel/UC5UfMqhWwMPSSPzuG2SZE-w',
+    title: 'YouTube',
+    icon: '/icons/youtube.svg',
+    alt: 'YouTube',
+  },
+  {
+    href: 'https://x.com/mugbee_summons',
+    title: 'X（旧Twitter）',
+    icon: '/icons/x.svg',
+    alt: 'X（旧Twitter）',
+  },
+];
+---
+
+<nav>
+  <ul>
+    {
+      links.map((link) => (
+        <li>
+          <a href={link.href} title={link.title}>
+            <img src={link.icon} alt={link.alt} width="30" height="30" />
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
