@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Taxonomy from '../components/Taxonomy.astro';
 import { formatJPDate, toISODateTime } from '../utils/date';
 
 export async function getStaticPaths() {
@@ -49,6 +50,8 @@ const thumbnailUrl = blog.data.thumbnail?.url ?? '/images/no-images.png';
         公開：{publishedDate}
       </time>
     </header>
+
+    <Taxonomy category={blog.data.category} tags={blog.data.tags} />
 
     <div set:html={blog.data.content} />
   </main>
