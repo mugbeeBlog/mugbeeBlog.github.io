@@ -18,11 +18,17 @@ export const createMicroCMSLoader = (endpoint: string) => {
     try {
       return await client.getAllContents({ endpoint });
     } catch (error) {
-      console.error(
-        `MicroCMSのエンドポイント取得に失敗しました: ${endpoint}`,
-        error
-      );
-      throw new Error(`コンテンツの読み込みに失敗しました: ${endpoint}`);
+      const errorMessage =
+        error instanceof Error ? error.message : 'Unknown error';
+
+      console.error(`MicroCMSのエンドポイント取得に失敗しました: ${endpoint}`, {
+        error: errorMessage,
+        originalError: error,
+      });
+
+      throw new Error(`コンテンツの読み込みに失敗しました: ${endpoint}`, {
+        cause: error,
+      });
     }
   };
 };
