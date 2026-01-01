@@ -25,8 +25,9 @@ function truncateText(text: string, maxLength: number): string {
       {blogs.map((post) => {
         const postUrl = `/${post.data.slug}/`;
         const postDate = post.data.publishedAt;
-        const thumbnailUrl = post.data.thumbnail?.url ?? DEFAULT_THUMBNAIL_PATH;
-        const thumbnailAlt = post.data.thumbnail?.url
+        const thumbnail = post.data.thumbnail;
+        const thumbnailUrl = thumbnail?.url ?? DEFAULT_THUMBNAIL_PATH;
+        const thumbnailAlt = thumbnail?.url
           ? `${post.data.title}のサムネイル画像`
           : 'デフォルト画像';
 
