@@ -2,7 +2,7 @@
 import { getCollection } from 'astro:content';
 import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { formatJPDate } from '../utils/date';
+import { formatJPDate, toISODateTime } from '../utils/date';
 
 export async function getStaticPaths() {
   const blogs = await getCollection('blogs');
@@ -34,10 +34,16 @@ const thumbnailUrl = blog.data.thumbnail?.url ?? '/images/no-images.png';
     <h1>{blog.data.title}</h1>
 
     <header>
-      <time>
+      <time datetime={toISODateTime(blog.data.publishedAt)}>
         {
           blog.data.updatedAt.getTime() !== blog.data.publishedAt.getTime() && (
-            <span>更新 {updatedDate} / </span>
+            <span>
+              更新{' '}
+              <time datetime={toISODateTime(blog.data.updatedAt)}>
+                {updatedDate}
+              </time>
+              {' / '}
+            </span>
           )
         }
         公開：{publishedDate}
