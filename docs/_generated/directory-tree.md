@@ -41,7 +41,8 @@ mugbeeBlog
 │   │   ├── Header.astro
 │   │   ├── HeaderNav.astro
 │   │   ├── Pagination.astro
-│   │   └── SocialLinks.astro
+│   │   ├── SocialLinks.astro
+│   │   └── Taxonomy.astro
 │   ├── content
 │   │   ├── config.ts
 │   │   └── microcms.ts
@@ -52,6 +53,14 @@ mugbeeBlog
 │   ├── pages
 │   │   ├── page
 │   │   │   └── [...page].astro
+│   │   ├── taxonomy
+│   │   │   ├── category
+│   │   │   │   └── [slug]
+│   │   │   │       └── [...page].astro
+│   │   │   ├── tag
+│   │   │   │   └── [slug]
+│   │   │   │       └── [...page].astro
+│   │   │   └── index.astro
 │   │   ├── [...slug].astro
 │   │   └── index.astro
 │   ├── styles
@@ -59,7 +68,8 @@ mugbeeBlog
 │   │       └── global.scss
 │   └── utils
 │       ├── date.ts
-│       └── sortBlogs.ts
+│       ├── sortBlogs.ts
+│       └── taxonomy.ts
 ├── .browserslistrc
 ├── .env
 ├── .gitignore

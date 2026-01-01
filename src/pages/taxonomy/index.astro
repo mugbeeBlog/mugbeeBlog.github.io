@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { countTaxonomies } from '../../utils/taxonomy';
+
+const posts = await getCollection('blogs');
+
+const categories = countTaxonomies(posts, (post) => post.data.category);
+const tags = countTaxonomies(posts, (post) => post.data.tags);
+---
+
+<BaseLayout title="カテゴリ・タグの一覧">
+  <h1>カテゴリ一覧</h1>
+  {
+    categories.length > 0 ? (
+      <ul>
+        {categories.map((cat) => (
+          <li>
+            <a href={`/taxonomy/category/${cat.slug}/`}>
+              {cat.name} ({cat.count})
+            </a>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p>カテゴリがありません。</p>
+    )
+  }
+
+  <h1>タグ一覧</h1>
+  {
+    tags.length > 0 ? (
+      <ul>
+        {tags.map((tag) => (
+          <li>
+            <a href={`/taxonomy/tag/${tag.slug}/`}>
+              #{tag.name} ({tag.count})
+            </a>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p>タグがありません。</p>
+    )
+  }
+</BaseLayout>
