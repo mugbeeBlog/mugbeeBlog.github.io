@@ -1,0 +1,45 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
+
+type Blog = CollectionEntry<'blogs'>;
+
+interface Props {
+  contents: Blog[];
+  title: string;
+}
+
+const { contents, title } = Astro.props;
+---
+
+{
+  contents.length > 0 && (
+    <aside>
+      <article>
+        <h3>{title}</h3>
+
+        <ul>
+          {contents.map((item) => {
+            const thumbnail = item.data.thumbnail;
+
+            return (
+              <li>
+                <a href={`/${item.data.slug}`}>
+                  {thumbnail && (
+                    <Image
+                      src={thumbnail.url}
+                      alt={item.data.title}
+                      width={thumbnail.width}
+                      height={thumbnail.height}
+                    />
+                  )}
+                  <h4>{item.data.title}</h4>
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </article>
+    </aside>
+  )
+}
