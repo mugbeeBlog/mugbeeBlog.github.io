@@ -10,43 +10,38 @@ type TaxonomyCount = {
   count: number;
 };
 
+const processTaxonomy = (
+  items: { id: string; name: string; slug?: string }[] | undefined,
+  map: Map<string, TaxonomyCount>
+) => {
+  if (!items) return;
+
+  items.forEach((item) => {
+    const slug = item.slug ?? item.id;
+    const entry = map.get(slug);
+
+    if (entry) {
+      entry.count++;
+    } else {
+      map.set(slug, { name: item.name, slug, count: 1 });
+    }
+  });
+};
+
 const categoryMap = new Map<string, TaxonomyCount>();
 const tagMap = new Map<string, TaxonomyCount>();
 
 posts.forEach((post) => {
-  const categories = post.data.category ?? [];
-  categories.forEach((cat) => {
-    const slug = cat.slug ?? cat.id;
-
-    if (!categoryMap.has(slug)) {
-      categoryMap.set(slug, { name: cat.name, slug, count: 0 });
-    }
-
-    const entry = categoryMap.get(slug);
-    if (entry) {
-      entry.count++;
-    }
-  });
-
-  const tags = post.data.tags ?? [];
-  tags.forEach((tag) => {
-    const slug = tag.slug ?? tag.id;
-
-    if (!tagMap.has(slug)) {
-      tagMap.set(slug, { name: tag.name, slug, count: 0 });
-    }
-
-    const entry = tagMap.get(slug);
-    if (entry) {
-      entry.count++;
-    }
-  });
+  processTaxonomy(post.data.category, categoryMap);
+  processTaxonomy(post.data.tags, tagMap);
 });
 
 const categories = Array.from(categoryMap.values()).sort(
   (a, b) => b.count - a.count || a.name.localeCompare(b.name)
 );
-const tags = Array.from(tagMap.values()).sort((a, b) => b.count - a.count);
+const tags = Array.from(tagMap.values()).sort(
+  (a, b) => b.count - a.count || a.name.localeCompare(b.name)
+);
 ---
 
 <BaseLayout title="カテゴリ & タグ 一覧">
