@@ -5,9 +5,10 @@ import ArticleCard from '../components/ArticleCard.astro';
 import { site } from '../data/constants.ts';
 
 const blogs = (await getCollection('blogs')).sort((a, b) => {
-  const dateA = a.data.publishedAt?.getTime() ?? 0;
-  const dateB = b.data.publishedAt?.getTime() ?? 0;
-  return dateB - dateA || a.data.slug.localeCompare(b.data.slug);
+  return (
+    b.data.publishedAt.getTime() - a.data.publishedAt.getTime() ||
+    a.data.slug.localeCompare(b.data.slug)
+  );
 });
 ---
 
