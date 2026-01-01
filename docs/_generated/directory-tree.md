@@ -1,7 +1,8 @@
 mugbeeBlog
 ├── .astro
 │   ├── collections
-│   │   └── blogs.schema.json
+│   │   ├── blogs.schema.json
+│   │   └── messages.schema.json
 │   ├── content-assets.mjs
 │   ├── content-modules.mjs
 │   ├── content.d.ts
@@ -40,16 +41,22 @@ mugbeeBlog
 │   │   ├── Footer.astro
 │   │   ├── Header.astro
 │   │   ├── HeaderNav.astro
+│   │   ├── MessageBoard.astro
 │   │   ├── Pagination.astro
+│   │   ├── Recommend.astro
 │   │   ├── SocialLinks.astro
 │   │   └── Taxonomy.astro
 │   ├── content
+│   │   ├── messages
+│   │   │   ├── 2025-10-30.md
+│   │   │   └── 2026-01-02.md
 │   │   ├── config.ts
 │   │   └── microcms.ts
 │   ├── data
 │   │   └── constants.ts
 │   ├── layouts
-│   │   └── BaseLayout.astro
+│   │   ├── BaseLayout.astro
+│   │   └── PageLayout.astro
 │   ├── pages
 │   │   ├── page
 │   │   │   └── [...page].astro
