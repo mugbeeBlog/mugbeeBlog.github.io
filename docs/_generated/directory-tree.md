@@ -1,6 +1,7 @@
 mugbeeBlog
 ├── .astro
 │   ├── collections
+│   │   └── blogs.schema.json
 │   ├── content-assets.mjs
 │   ├── content-modules.mjs
 │   ├── content.d.ts
@@ -24,14 +25,30 @@ mugbeeBlog
 │       ├── directory-tree.md
 │       └── wsl-extensions.txt
 ├── public
-│   └── favicon.svg
+│   ├── images
+│   │   └── no-images.png
+│   ├── apple-touch-icon.png
+│   └── favicon.ico
 ├── src
+│   ├── components
+│   │   ├── ArticleCard.astro
+│   │   └── BaseHead.astro
+│   ├── content
+│   │   ├── config.ts
+│   │   └── microcms.ts
+│   ├── data
+│   │   └── constants.ts
+│   ├── layouts
+│   │   └── BaseLayout.astro
 │   ├── pages
 │   │   └── index.astro
-│   └── styles
-│       └── settings
-│           └── global.scss
+│   ├── styles
+│   │   └── settings
+│   │       └── global.scss
+│   └── utils
+│       └── date.ts
 ├── .browserslistrc
+├── .env
 ├── .gitignore
 ├── .nojekyll
 ├── .prettierrc.mjs
