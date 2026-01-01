@@ -18,6 +18,10 @@ export type TaxonomyWithPosts = {
   posts: CollectionEntry<'blogs'>[];
 };
 
+export type TaxonomyGetter = (
+  post: CollectionEntry<'blogs'>
+) => TaxonomyItem[] | undefined;
+
 function processTaxonomyItems<T>(
   items: TaxonomyItem[] | undefined,
   map: Map<string, T>,
@@ -40,7 +44,7 @@ function processTaxonomyItems<T>(
 
 export function countTaxonomies(
   posts: CollectionEntry<'blogs'>[],
-  getTaxonomies: (post: CollectionEntry<'blogs'>) => TaxonomyItem[] | undefined
+  getTaxonomies: TaxonomyGetter
 ): TaxonomyCount[] {
   const map = new Map<string, TaxonomyCount>();
 
@@ -60,7 +64,7 @@ export function countTaxonomies(
 
 export function groupPostsByTaxonomy(
   posts: CollectionEntry<'blogs'>[],
-  getTaxonomies: (post: CollectionEntry<'blogs'>) => TaxonomyItem[] | undefined
+  getTaxonomies: TaxonomyGetter
 ): Map<string, TaxonomyWithPosts> {
   const map = new Map<string, TaxonomyWithPosts>();
 
