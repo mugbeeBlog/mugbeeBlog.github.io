@@ -17,19 +17,25 @@ const hasItems = category.length > 0 || tags.length > 0;
 {
   hasItems && (
     <nav>
-      <ul>
-        {category.map((c) => (
-          <li>
-            <a href={`/taxonomy/category/${c.slug ?? c.id}/`}>{c.name}</a>
-          </li>
-        ))}
+      {category.length > 0 && (
+        <ul aria-label="カテゴリ">
+          {category.map((c) => (
+            <li>
+              <a href={`/taxonomy/category/${c.slug ?? c.id}/`}>{c.name}</a>
+            </li>
+          ))}
+        </ul>
+      )}
 
-        {tags.map((t) => (
-          <li>
-            <a href={`/taxonomy/tag/${t.slug ?? t.id}/`}>#{t.name}</a>
-          </li>
-        ))}
-      </ul>
+      {tags.length > 0 && (
+        <ul aria-label="タグ">
+          {tags.map((t) => (
+            <li>
+              <a href={`/taxonomy/tag/${t.slug ?? t.id}/`}>#{t.name}</a>
+            </li>
+          ))}
+        </ul>
+      )}
     </nav>
   )
 }
