@@ -1,0 +1,86 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('blogs');
+
+type TaxonomyCount = {
+  name: string;
+  slug: string;
+  count: number;
+};
+
+const categoryMap = new Map<string, TaxonomyCount>();
+const tagMap = new Map<string, TaxonomyCount>();
+
+posts.forEach((post) => {
+  const categories = post.data.category ?? [];
+  categories.forEach((cat) => {
+    const slug = cat.slug ?? cat.id;
+
+    if (!categoryMap.has(slug)) {
+      categoryMap.set(slug, { name: cat.name, slug, count: 0 });
+    }
+
+    const entry = categoryMap.get(slug);
+    if (entry) {
+      entry.count++;
+    }
+  });
+
+  const tags = post.data.tags ?? [];
+  tags.forEach((tag) => {
+    const slug = tag.slug ?? tag.id;
+
+    if (!tagMap.has(slug)) {
+      tagMap.set(slug, { name: tag.name, slug, count: 0 });
+    }
+
+    const entry = tagMap.get(slug);
+    if (entry) {
+      entry.count++;
+    }
+  });
+});
+
+const categories = Array.from(categoryMap.values()).sort(
+  (a, b) => b.count - a.count || a.name.localeCompare(b.name)
+);
+const tags = Array.from(tagMap.values()).sort((a, b) => b.count - a.count);
+---
+
+<BaseLayout title="カテゴリ & タグ 一覧">
+  <h1>カテゴリ一覧</h1>
+  {
+    categories.length > 0 ? (
+      <ul>
+        {categories.map((cat) => (
+          <li>
+            <a href={`/taxonomy/category/${cat.slug}/`}>
+              {cat.name} ({cat.count})
+            </a>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p>カテゴリがありません。</p>
+    )
+  }
+
+  <h1>タグ一覧</h1>
+  {
+    tags.length > 0 ? (
+      <ul>
+        {tags.map((tag) => (
+          <li>
+            <a href={`/taxonomy/tag/${tag.slug}/`}>
+              #{tag.name} ({tag.count})
+            </a>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p>タグがありません。</p>
+    )
+  }
+</BaseLayout>
