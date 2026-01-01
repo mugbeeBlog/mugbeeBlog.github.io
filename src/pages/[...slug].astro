@@ -60,7 +60,7 @@ const pickupBlogs = pickupIds
     <Taxonomy category={blog.data.category} tags={blog.data.tags} />
 
     <div set:html={blog.data.content} />
-
-    <Recommend slot="recommend" contents={pickupBlogs} title="ピックアップ" />
   </main>
+
+  <Recommend slot="recommend" contents={pickupBlogs} title="ピックアップ" />
 </PageLayout>
