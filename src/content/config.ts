@@ -17,6 +17,12 @@ const thumbnailSchema = z.object({
   height: z.number(),
 });
 
+const taxonomySchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  slug: z.string().optional(),
+});
+
 const blogs = defineCollection({
   loader: createMicroCMSLoader('blogs'),
   schema: z
@@ -26,6 +32,8 @@ const blogs = defineCollection({
       description: z.string().optional(),
       content: z.string(),
       thumbnail: thumbnailSchema.optional(),
+      category: z.array(taxonomySchema).optional(),
+      tags: z.array(taxonomySchema).optional(),
     })
     .merge(microCMSDateFieldsSchema),
 });
