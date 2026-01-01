@@ -36,7 +36,7 @@ const thumbnailUrl = blog.data.thumbnail?.url ?? '/images/no-images.png';
     <header>
       <time datetime={toISODateTime(blog.data.publishedAt)}>
         {
-          blog.data.updatedAt.getTime() !== blog.data.publishedAt.getTime() && (
+          blog.data.updatedAt > blog.data.publishedAt && (
             <span>
               更新{' '}
               <time datetime={toISODateTime(blog.data.updatedAt)}>
