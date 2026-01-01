@@ -2,19 +2,25 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ArticleCard from '../components/ArticleCard.astro';
-import { site } from '../data/constants.ts';
+import Pagination from '../components/Pagination.astro';
+import { site, pagination } from '../data/constants.ts';
+import { sortBlogsByDate } from '../utils/sortBlogs';
 
-const blogs = (await getCollection('blogs')).sort((a, b) => {
-  return (
-    b.data.publishedAt.getTime() - a.data.publishedAt.getTime() ||
-    a.data.slug.localeCompare(b.data.slug)
-  );
-});
+const blogs = sortBlogsByDate(await getCollection('blogs'));
+const firstPageBlogs = blogs.slice(0, pagination.pageSize);
+const lastPage = Math.ceil(blogs.length / pagination.pageSize);
 ---
 
 <BaseLayout title={site.title} description={site.description}>
   <main>
-    <ArticleCard blogs={blogs} />
+    <ArticleCard blogs={firstPageBlogs} />
+    {
+      lastPage > 1 && (
+        <div class="pagination">
+          <Pagination currentPage={1} lastPage={lastPage} basePath="/page" />
+        </div>
+      )
+    }
   </main>
 </BaseLayout>
 
