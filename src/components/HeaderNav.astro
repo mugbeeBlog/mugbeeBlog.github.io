@@ -1,7 +1,10 @@
 ---
 const { pathname } = Astro.url;
 
-const navItems = [{ href: '/', label: '最新記事' }];
+const navItems = [
+  { href: '/', label: '最新記事' },
+  { href: '/taxonomy/', label: 'カテゴリ・記事' },
+];
 
 const isActive = (href: string) =>
   href === '/' ? pathname === href : pathname.startsWith(href);
