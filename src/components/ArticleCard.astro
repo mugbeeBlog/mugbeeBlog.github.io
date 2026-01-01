@@ -12,10 +12,6 @@ const { blogs } = Astro.props;
 const DEFAULT_THUMBNAIL_PATH = '/images/no-images.png';
 const DESCRIPTION_MAX_LENGTH = 80;
 
-function resolvePostDate(data: { publishedAt?: Date; createdAt?: Date }): Date {
-  return data.publishedAt ?? data.createdAt ?? new Date();
-}
-
 function truncateText(text: string, maxLength: number): string {
   return text.length <= maxLength
     ? text
@@ -28,7 +24,7 @@ function truncateText(text: string, maxLength: number): string {
     <ul>
       {blogs.map((post) => {
         const postUrl = `/${post.data.slug}/`;
-        const postDate = resolvePostDate(post.data);
+        const postDate = post.data.publishedAt;
         const thumbnailUrl = post.data.thumbnail?.url ?? DEFAULT_THUMBNAIL_PATH;
         const thumbnailAlt = post.data.thumbnail?.url
           ? `${post.data.title}のサムネイル画像`
