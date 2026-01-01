@@ -1,12 +1,18 @@
-const WEEKDAYS_JA = ['日', '月', '火', '水', '木', '金', '土'] as const;
-
 export function formatJPDate(date: Date): string {
-  const weekday = WEEKDAYS_JA[date.getDay()];
-  const formatted = date.toLocaleDateString('ja-JP', {
+  const formatter = new Intl.DateTimeFormat('ja-JP', {
     timeZone: 'Asia/Tokyo',
     year: 'numeric',
     month: 'long',
     day: 'numeric',
   });
+
+  const weekdayFormatter = new Intl.DateTimeFormat('ja-JP', {
+    timeZone: 'Asia/Tokyo',
+    weekday: 'short',
+  });
+
+  const formatted = formatter.format(date);
+  const weekday = weekdayFormatter.format(date).replace('曜日', '');
+
   return `${formatted}(${weekday})`;
 }
