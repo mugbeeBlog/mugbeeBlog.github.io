@@ -9,7 +9,7 @@ const categories = countTaxonomies(posts, (post) => post.data.category);
 const tags = countTaxonomies(posts, (post) => post.data.tags);
 ---
 
-<BaseLayout title="カテゴリ・タグの一覧">
+<BaseLayout title="カテゴリ・タグの一覧" noindex={true}>
   <h1>カテゴリ一覧</h1>
   {
     categories.length > 0 ? (

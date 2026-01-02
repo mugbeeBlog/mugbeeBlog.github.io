@@ -69,7 +69,8 @@ mugbeeBlog
 │   │   │   │       └── [...page].astro
 │   │   │   └── index.astro
 │   │   ├── [...slug].astro
-│   │   └── index.astro
+│   │   ├── index.astro
+│   │   └── info.astro
 │   ├── styles
 │   │   └── settings
 │   │       └── global.scss
