@@ -11,7 +11,7 @@ const siteDescription = site.description;
 
 const pageTitle = title ? `${title} | ${siteTitle}` : siteTitle;
 const pageDescription = description ?? siteDescription;
-const pageOgImage = ogImage ?? '/og-image.jpg';
+const pageOgImage = new URL(ogImage ?? '/og-image.jpg', Astro.site).href;
 const pageOgType = ogType ?? 'website';
 const isNoIndex = noindex ?? false;
 ---
