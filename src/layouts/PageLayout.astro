@@ -6,19 +6,10 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
 const GTM_ID = import.meta.env.PUBLIC_GTM_ID;
-const { noindex = false, title, description, ogImage, ogType } = Astro.props;
 ---
 
 <html lang="ja">
-  <head>
-    <BaseHead
-      noindex={noindex}
-      title={title}
-      description={description}
-      ogImage={ogImage}
-      ogType={ogType}
-    />
-  </head>
+  <head><BaseHead {...Astro.props} /></head>
 
   <body>
     {
