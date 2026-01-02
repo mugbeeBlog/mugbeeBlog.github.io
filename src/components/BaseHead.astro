@@ -1,7 +1,7 @@
 ---
 import { site } from '../data/constants';
 
-const { title, description } = Astro.props;
+const { noindex = false, title, description } = Astro.props;
 
 const GTM_ID = import.meta.env.PUBLIC_GTM_ID;
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
@@ -44,3 +44,6 @@ const pageDescription = description ?? siteDescription;
 <!-- Icons -->
 <link rel="icon" href="/favicon.ico" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+<!-- noindex -->
+{noindex && <meta name="robots" content="noindex, nofollow" />}
