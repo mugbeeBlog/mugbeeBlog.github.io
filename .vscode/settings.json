@@ -41,5 +41,7 @@
   },
 
   // cSpell
-  "cSpell.words": ["MICROCMS", "OAOO", "partytown"]
+  "cSpell.words": ["microcms", "Mugbee", "mugbeeblog", "noto", "partytown"],
+  "cSpell.ignoreRegExpList": ["[０-９Ａ-Ｚａ-ｚぁ-んァ-ヶ亜-熙纊-黑]+"], // 日本語を無視
+  "cSpell.ignorePaths": ["docs/_generated/**"]
 }

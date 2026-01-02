@@ -26,6 +26,11 @@ mugbeeBlog
 │       ├── directory-tree.md
 │       └── wsl-extensions.txt
 ├── public
+│   ├── fonts
+│   │   ├── inter-v20-latin-700.woff2
+│   │   ├── inter-v20-latin-regular.woff2
+│   │   ├── noto-sans-jp-v55-japanese-700.woff2
+│   │   └── noto-sans-jp-v55-japanese-regular.woff2
 │   ├── icons
 │   │   ├── github.svg
 │   │   ├── x.svg
@@ -34,6 +39,7 @@ mugbeeBlog
 │   │   └── no-images.png
 │   ├── apple-touch-icon.png
 │   ├── favicon.ico
+│   ├── og-image.jpg
 │   └── robots.txt
 ├── src
 │   ├── components
@@ -74,8 +80,14 @@ mugbeeBlog
 │   │   ├── info.astro
 │   │   └── rss.xml.js
 │   ├── styles
-│   │   └── settings
-│   │       └── global.scss
+│   │   ├── base
+│   │   │   ├── _index.scss
+│   │   │   └── global.scss
+│   │   ├── settings
+│   │   │   ├── _index.scss
+│   │   │   ├── reset.scss
+│   │   │   └── variables.scss
+│   │   └── index.scss
 │   └── utils
 │       ├── date.ts
 │       ├── sortBlogs.ts

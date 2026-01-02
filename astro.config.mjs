@@ -11,6 +11,9 @@ export default defineConfig({
         usePolling: true, // WSL2環境での変更検知安定化
       },
     },
+    css: {
+      devSourcemap: true,
+    },
   },
   integrations: [
     partytown({
