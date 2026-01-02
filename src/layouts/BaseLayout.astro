@@ -7,12 +7,12 @@ import Footer from '../components/Footer.astro';
 import MessageBoard from '../components/MessageBoard.astro';
 
 const GTM_ID = import.meta.env.PUBLIC_GTM_ID;
-const { title, description } = Astro.props;
+const { noindex = false, title, description } = Astro.props;
 ---
 
 <html lang="ja">
   <head>
-    <BaseHead title={title} description={description} />
+    <BaseHead noindex={noindex} title={title} description={description} />
   </head>
 
   <body>
