@@ -33,7 +33,8 @@ mugbeeBlog
 │   ├── images
 │   │   └── no-images.png
 │   ├── apple-touch-icon.png
-│   └── favicon.ico
+│   ├── favicon.ico
+│   └── robots.txt
 ├── src
 │   ├── components
 │   │   ├── ArticleCard.astro
@@ -70,7 +71,8 @@ mugbeeBlog
 │   │   │   └── index.astro
 │   │   ├── [...slug].astro
 │   │   ├── index.astro
-│   │   └── info.astro
+│   │   ├── info.astro
+│   │   └── rss.xml.js
 │   ├── styles
 │   │   └── settings
 │   │       └── global.scss
