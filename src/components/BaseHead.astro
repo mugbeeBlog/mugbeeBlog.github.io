@@ -71,7 +71,22 @@ const isNoIndex = noindex ?? false;
   rel="preload"
   as="font"
   type="font/woff2"
+  href="/fonts/noto-sans-jp-v55-japanese-regular.woff2"
+  crossorigin="anonymous"
+  fetchpriority="high"
+/>
+<link
+  rel="preload"
+  as="font"
+  type="font/woff2"
   href="/fonts/inter-v20-latin-regular.woff2"
+  crossorigin="anonymous"
+/>
+<link
+  rel="preload"
+  as="font"
+  type="font/woff2"
+  href="/fonts/noto-sans-jp-v55-japanese-700.woff2"
   crossorigin="anonymous"
   fetchpriority="low"
 />
@@ -83,19 +98,37 @@ const isNoIndex = noindex ?? false;
   crossorigin="anonymous"
   fetchpriority="low"
 />
-<link
-  rel="preload"
-  as="font"
-  type="font/woff2"
-  href="/fonts/noto-sans-jp-v55-japanese-regular.woff2"
-  crossorigin="anonymous"
-  fetchpriority="low"
-/>
-<link
-  rel="preload"
-  as="font"
-  type="font/woff2"
-  href="/fonts/noto-sans-jp-v55-japanese-700.woff2"
-  crossorigin="anonymous"
-  fetchpriority="low"
-/>
+
+<style is:global>
+  @font-face {
+    font-family: 'Noto Sans JP';
+    font-style: normal;
+    font-weight: 400;
+    src: url('/fonts/noto-sans-jp-v55-japanese-regular.woff2') format('woff2');
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Noto Sans JP';
+    font-style: normal;
+    font-weight: 700;
+    src: url('/fonts/noto-sans-jp-v55-japanese-700.woff2') format('woff2');
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 400;
+    src: url('/fonts/inter-v20-latin-regular.woff2') format('woff2');
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 700;
+    src: url('/fonts/inter-v20-latin-700.woff2') format('woff2');
+    font-display: swap;
+  }
+</style>
