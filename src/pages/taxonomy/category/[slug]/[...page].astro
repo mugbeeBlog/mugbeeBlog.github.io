@@ -29,7 +29,10 @@ export const getStaticPaths = async ({ paginate }: GetStaticPathsOptions) => {
 const { page, name } = Astro.props;
 ---
 
-<BaseLayout title={`カテゴリ: ${name} - ${page.currentPage}ページ目`}>
+<BaseLayout
+  title={`カテゴリ: ${name} - ${page.currentPage}ページ目`}
+  noindex={true}
+>
   <header>
     <h1>
       カテゴリ: {name}
