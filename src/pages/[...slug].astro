@@ -19,7 +19,10 @@ const { blog, blogs } = Astro.props;
 
 const publishedDate = formatJPDate(blog.data.publishedAt);
 const updatedDate = formatJPDate(blog.data.updatedAt);
-const thumbnailUrl = blog.data.thumbnail?.url ?? '/images/no-images.png';
+
+const thumbnail = blog.data.thumbnail;
+const thumbnailUrl = thumbnail?.url ?? '/images/no-images.png';
+const ogImage = thumbnail ? new URL(thumbnail.url, Astro.site).href : undefined;
 
 const pickupIds = blog.data.pickup ?? [];
 const pickupBlogs = pickupIds
@@ -27,7 +30,12 @@ const pickupBlogs = pickupIds
   .filter((b): b is (typeof blogs)[number] => Boolean(b));
 ---
 
-<PageLayout title={blog.data.title} description={blog.data.description}>
+<PageLayout
+  ogType="article"
+  title={blog.data.title}
+  description={blog.data.description}
+  ogImage={ogImage}
+>
   <main>
     <Image
       src={thumbnailUrl}
