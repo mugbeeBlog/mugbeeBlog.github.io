@@ -1,0 +1,11 @@
+@use './fonts.scss' as *;
+
+/* Colors */
+$color-link: rgba(0 0 238);
+$color-link-visited: rgba(85 26 139);
+
+/* Font base */
+$font-body: 'Noto Sans JP', inter, arial, sans-serif;
+
+/* breakpoints */
+$bp-mobile: 768px;
