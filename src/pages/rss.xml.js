@@ -4,7 +4,7 @@ import { site } from '../data/constants';
 
 export async function GET() {
   const posts = (await getCollection('blogs')).sort(
-    (a, b) => b.data.publishedAt - a.data.publishedAt
+    (a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime()
   );
 
   return rss({
