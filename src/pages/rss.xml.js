@@ -17,7 +17,7 @@ export async function GET() {
       pubDate: post.data.publishedAt,
       description:
         post.data.description ??
-        post.data.content.replace(/<[^>]*>?/gm, '').slice(0, 120),
+        post.data.content.replace(/<[^>]+>/g, '').slice(0, 120),
     })),
   });
 }
