@@ -1,7 +1,7 @@
 ---
 import { site } from '../data/constants';
 
-const { noindex = false, title, description } = Astro.props;
+const { noindex, title, description, ogImage, ogType } = Astro.props;
 
 const GTM_ID = import.meta.env.PUBLIC_GTM_ID;
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
@@ -11,23 +11,24 @@ const siteDescription = site.description;
 
 const pageTitle = title ? `${title} | ${siteTitle}` : siteTitle;
 const pageDescription = description ?? siteDescription;
+const pageOgImage = ogImage ?? '/og-image.png';
+const pageOgType = ogType ?? 'website';
+const isNoIndex = noindex ?? false;
 ---
 
 <!-- Google Tag Manager -->
-{GTM_ID && (
-  <script type="text/partytown" define:vars={{ GTM_ID }}>
-    (function (w, d, s, l, i) {
-      w[l] = w[l] || [];
-      w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
-      const f = d.getElementsByTagName(s)[0];
-      const j = d.createElement(s);
-      const dl = l !== 'dataLayer' ? '&l=' + l : '';
-      j.async = true;
-      j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-      f.parentNode.insertBefore(j, f);
-    })(window, document, 'script', 'dataLayer', GTM_ID);
-  </script>
-)}
+<script type="text/partytown" define:vars={{ GTM_ID }}>
+  (function (w, d, s, l, i) {
+    w[l] = w[l] || [];
+    w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+    const f = d.getElementsByTagName(s)[0];
+    const j = d.createElement(s);
+    const dl = l !== 'dataLayer' ? '&l=' + l : '';
+    j.async = true;
+    j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+    f.parentNode.insertBefore(j, f);
+  })(window, document, 'script', 'dataLayer', GTM_ID);
+</script>
 
 <!-- Base Meta -->
 <meta charset="utf-8" />
@@ -37,13 +38,27 @@ const pageDescription = description ?? siteDescription;
 <!-- Canonical -->
 <link rel="canonical" href={canonicalUrl.href} />
 
+<!-- noindex -->
+{isNoIndex && <meta name="robots" content="noindex, nofollow" />}
+
 <!-- Primary Meta -->
 <title>{pageTitle}</title>
 <meta name="description" content={pageDescription} />
 
+<!-- Open Graph -->
+<meta property="og:type" content={pageOgType} />
+<meta property="og:site_name" content={siteTitle} />
+<meta property="og:title" content={pageTitle} />
+<meta property="og:description" content={pageDescription} />
+<meta property="og:url" content={canonicalUrl.href} />
+<meta property="og:image" content={pageOgImage} />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={pageTitle} />
+<meta name="twitter:description" content={pageDescription} />
+<meta name="twitter:image" content={pageOgImage} />
+
 <!-- Icons -->
 <link rel="icon" href="/favicon.ico" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-
-<!-- noindex -->
-{noindex && <meta name="robots" content="noindex, nofollow" />}
