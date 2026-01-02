@@ -11,7 +11,7 @@ const firstPageBlogs = blogs.slice(0, pagination.pageSize);
 const lastPage = Math.ceil(blogs.length / pagination.pageSize);
 ---
 
-<BaseLayout title={site.title} description={site.description}>
+<BaseLayout description={site.description}>
   <main>
     <ArticleCard blogs={firstPageBlogs} />
     {
