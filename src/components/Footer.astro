@@ -5,7 +5,7 @@ import SocialLinks from './SocialLinks.astro';
 const currentYear = new Date().getFullYear();
 ---
 
-<footer>
+<footer class="stack">
   <button type="button" id="page-top-btn"> ▲ ページ上部へ ▲ </button>
 
   <div class="social-links">
@@ -23,3 +23,46 @@ const currentYear = new Date().getFullYear();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 </script>
+
+<style lang="scss">
+  // layout
+  @property --stack-gap {
+    syntax: '<length>';
+    inherits: false;
+    initial-value: 24px;
+  }
+
+  .stack {
+    > * + * {
+      margin-top: var(--stack-gap, 1.5rem);
+    }
+  }
+</style>
+
+<style lang="scss">
+  // design
+  footer {
+    text-align: center;
+  }
+
+  button {
+    padding: 8px 16px;
+    cursor: pointer;
+    border: 1px solid #777;
+    border-radius: 9999px;
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: translateY(-5px);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  small {
+    display: block;
+    opacity: 0.75;
+  }
+</style>

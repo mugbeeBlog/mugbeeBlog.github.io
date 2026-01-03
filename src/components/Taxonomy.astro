@@ -21,7 +21,12 @@ const hasItems = category.length > 0 || tags.length > 0;
         <ul aria-label="カテゴリ">
           {category.map((c) => (
             <li>
-              <a href={`/taxonomy/category/${c.slug ?? c.id}/`}>{c.name}</a>
+              <a
+                href={`/taxonomy/category/${c.slug ?? c.id}/`}
+                data-type="category"
+              >
+                {c.name}
+              </a>
             </li>
           ))}
         </ul>
@@ -31,7 +36,9 @@ const hasItems = category.length > 0 || tags.length > 0;
         <ul aria-label="タグ">
           {tags.map((t) => (
             <li>
-              <a href={`/taxonomy/tag/${t.slug ?? t.id}/`}>#{t.name}</a>
+              <a href={`/taxonomy/tag/${t.slug ?? t.id}/`} data-type="tag">
+                #{t.name}
+              </a>
             </li>
           ))}
         </ul>
@@ -39,3 +46,60 @@ const hasItems = category.length > 0 || tags.length > 0;
     </nav>
   )
 }
+
+<style lang="scss">
+  @use '../styles/settings/variables' as *;
+
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  ul[aria-label='タグ'] {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  a {
+    padding: 0.25rem 0.75rem;
+    font-size: 80%;
+    text-decoration: none;
+    border-radius: 4px;
+    transition:
+      background-color 0.2s ease,
+      border-color 0.2s ease;
+
+    &[data-type='category'] {
+      font-weight: 700;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background-color: $color-link;
+      border: 1px solid $color-link;
+
+      &:hover {
+        background-color: rgb(65 150 225);
+        border-color: rgb(65 150 225);
+      }
+    }
+
+    &[data-type='tag'] {
+      color: #111;
+      border: 1px solid rgb(65 105 225 / 30%);
+
+      &:hover {
+        background-color: rgb(65 105 225 / 10%);
+      }
+    }
+  }
+</style>
