@@ -44,6 +44,7 @@ mugbeeBlog
 ├── src
 │   ├── components
 │   │   ├── ArticleCard.astro
+│   │   ├── Background.astro
 │   │   ├── BaseHead.astro
 │   │   ├── Footer.astro
 │   │   ├── Header.astro
@@ -83,6 +84,9 @@ mugbeeBlog
 │   │   ├── base
 │   │   │   ├── _index.scss
 │   │   │   └── global.scss
+│   │   ├── layouts
+│   │   │   ├── _index.scss
+│   │   │   └── layout.scss
 │   │   ├── settings
 │   │   │   ├── _index.scss
 │   │   │   ├── reset.scss
