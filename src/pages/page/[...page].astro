@@ -1,4 +1,6 @@
 ---
+import '../../styles/pages/paged.scss';
+
 import { getCollection } from 'astro:content';
 import type { GetStaticPathsOptions } from 'astro';
 import Pagination from '../../components/Pagination.astro';
@@ -20,7 +22,7 @@ const pageTitle = '記事一覧';
   title={`${pageTitle}(${page.currentPage}ページ目)`}
   description={`${pageTitle}の${page.currentPage}ページ目です。`}
 >
-  <main>
+  <main class="page stack">
     <header>
       <h1>
         {pageTitle}
@@ -28,12 +30,30 @@ const pageTitle = '記事一覧';
       </h1>
     </header>
 
-    <ArticleCard blogs={page.data} />
+    <div class="article-card">
+      <ArticleCard blogs={page.data} />
+    </div>
 
-    <Pagination
-      currentPage={page.currentPage}
-      lastPage={page.lastPage}
-      basePath="/page"
-    />
+    <div class="pagination">
+      <Pagination
+        currentPage={page.currentPage}
+        lastPage={page.lastPage}
+        basePath="/page"
+      />
+    </div>
   </main>
 </BaseLayout>
+
+<style lang="scss">
+  @property --stack-gap {
+    syntax: '<length>';
+    inherits: false;
+    initial-value: 24px;
+  }
+
+  .stack {
+    > * + * {
+      margin-top: var(--stack-gap, 1.5rem);
+    }
+  }
+</style>

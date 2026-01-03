@@ -87,6 +87,9 @@ mugbeeBlog
 │   │   ├── layouts
 │   │   │   ├── _index.scss
 │   │   │   └── layout.scss
+│   │   ├── pages
+│   │   │   ├── page.scss
+│   │   │   └── paged.scss
 │   │   ├── settings
 │   │   │   ├── _index.scss
 │   │   │   ├── reset.scss

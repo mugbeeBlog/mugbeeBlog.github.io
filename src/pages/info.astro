@@ -1,4 +1,6 @@
 ---
+import '../styles/pages/page.scss';
+
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
@@ -7,10 +9,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   description="当ブログの運営情報および免責事項・プライバシーポリシーページです。"
   noindex={true}
 >
-  <main>
+  <main class="post stack">
     <h1>運営情報</h1>
 
-    <section>
+    <section class="stack">
       <h2>サイト概要</h2>
       <p>
         スマートフォンゲーム「<a href="https://sb.gungho.jp/">サモンズボード</a
@@ -31,7 +33,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </dl>
     </section>
 
-    <section>
+    <section class="stack">
       <h2>著作権・権利表記</h2>
       <p>
         当ブログは、ガンホー・オンライン・エンターテイメント株式会社が提供する「サモンズボード」の攻略情報を扱っています。
@@ -65,7 +67,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </p>
     </section>
 
-    <section>
+    <section class="stack">
       <h2>免責事項</h2>
       <ul>
         <li>
@@ -84,16 +86,17 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </ul>
     </section>
 
-    <section>
+    <section class="stack">
       <h2>プライバシーポリシー</h2>
 
-      <section>
+      <section class="stack">
         <h3>個人情報の収集と利用</h3>
         <p>
           当ブログでは、お問い合わせ時に名前（ハンドルネーム）、メールアドレス等の個人情報をお尋ねすることがあります。これらの情報は、お問い合わせへの回答や必要な情報を電子メールでご連絡する場合にのみ使用し、その他の目的では使用いたしません。
         </p>
       </section>
-      <section>
+
+      <section class="stack">
         <h3>アクセス解析ツールについて</h3>
         <p>
           当ブログでは、Google
@@ -110,13 +113,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           >をご確認ください。
         </p>
       </section>
-      <section>
+
+      <section class="stack">
         <h3>情報の共有と開示</h3>
         <p>
           当ブログは、法的要求がある場合や権利・財産・安全の保護のために必要と判断される場合を除き、個人情報を第三者に開示または共有しません。
         </p>
       </section>
-      <section>
+
+      <section class="stack">
         <h3>リンクについて</h3>
         <p>
           当ブログはリンクフリーです。許可や事前連絡は不要ですが、以下の場合はリンクをご遠慮ください。
@@ -127,7 +132,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <li>当ブログの内容を誤認させるようなリンク</li>
         </ul>
       </section>
-      <section>
+
+      <section class="stack">
         <h3>プライバシーポリシーの変更</h3>
         <p>
           当ブログは必要に応じて本プライバシーポリシーを変更することがあります。変更後の内容は当ブログ上で公開された時点で効力を生じます。
@@ -135,33 +141,34 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </section>
     </section>
 
-    <section>
+    <section class="stack">
       <h2>お問い合わせ</h2>
       <p>
         記事に関するご意見・ご要望・訂正等は、以下のいずれかの方法でお問い合わせください。
       </p>
-      <ul>
-        <li>
-          GitHub Issues：
+
+      <dl>
+        <dt>GitHub Issues</dt>
+        <dd>
           <a href="https://github.com/mugbeeBlog/mugbeeBlog.github.io/issues">
-            https://github.com/mugbeeBlog/mugbeeBlog.github.io/issues
+            Issues · mugbeeBlog/mugbeeBlog.github.io
           </a>
-        </li>
-        <li>
-          YouTube チャンネル掲示板：
+        </dd>
+        <dt>YouTube チャンネル掲示板</dt>
+        <dd>
           <a
             href="https://www.youtube.com/post/Ugkxiv4f55qYlbCyO0MfhoyXIyDdi41q5vlh"
           >
-            https://www.youtube.com/post/Ugkxiv4f55qYlbCyO0MfhoyXIyDdi41q5vlh
+            まぐびー さんからの投稿 - YouTube
           </a>
-        </li>
-        <li>
-          X（旧Twitter）DM：
-          <a href="https://x.com/mugbee_summons">
-            https://x.com/mugbee_summons
+        </dd>
+        <dt>X（旧Twitter）DM</dt>
+        <dd>
+          <a href="https://x.com/mugbee_summons"
+            >Mugbee（@mugbee_summons）さん / X
           </a>
-        </li>
-      </ul>
+        </dd>
+      </dl>
     </section>
 
     <footer>
@@ -172,3 +179,35 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </footer>
   </main>
 </BaseLayout>
+
+<style lang="scss">
+  // layout
+  @property --stack-gap {
+    syntax: '<length>';
+    inherits: false;
+    initial-value: 24px;
+  }
+
+  .stack {
+    > * + * {
+      margin-top: var(--stack-gap, 1.5rem);
+    }
+
+    & h2 + *,
+    & h3 + * {
+      --stack-gap: 1rem;
+    }
+
+    & p + * {
+      --stack-gap: 0.75rem;
+    }
+  }
+</style>
+
+<style lang="scss">
+  // design
+
+  main footer {
+    text-align: right;
+  }
+</style>

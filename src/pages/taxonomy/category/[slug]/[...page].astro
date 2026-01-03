@@ -1,4 +1,6 @@
 ---
+import '../../../../styles/pages/paged.scss';
+
 import { getCollection } from 'astro:content';
 import type { GetStaticPathsOptions } from 'astro';
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
@@ -33,18 +35,38 @@ const { page, name } = Astro.props;
   title={`カテゴリ: ${name} - ${page.currentPage}ページ目`}
   noindex={true}
 >
-  <header>
-    <h1>
-      カテゴリ: {name}
-      <span>（{page.total}件 - {page.currentPage}ページ目）</span>
-    </h1>
-  </header>
+  <div class="page stack">
+    <header>
+      <h1>
+        カテゴリ: {name}
+        <span>（{page.total}件 - {page.currentPage}ページ目）</span>
+      </h1>
+    </header>
 
-  <ArticleCard blogs={page.data} />
+    <div class="article-card">
+      <ArticleCard blogs={page.data} />
+    </div>
 
-  <Pagination
-    currentPage={page.currentPage}
-    lastPage={page.lastPage}
-    basePath={`/taxonomy/category/${Astro.params.slug}`}
-  />
+    <div class="pagination">
+      <Pagination
+        currentPage={page.currentPage}
+        lastPage={page.lastPage}
+        basePath={`/taxonomy/category/${Astro.params.slug}`}
+      />
+    </div>
+  </div>
 </BaseLayout>
+
+<style lang="scss">
+  @property --stack-gap {
+    syntax: '<length>';
+    inherits: false;
+    initial-value: 24px;
+  }
+
+  .stack {
+    > * + * {
+      margin-top: var(--stack-gap, 1.5rem);
+    }
+  }
+</style>

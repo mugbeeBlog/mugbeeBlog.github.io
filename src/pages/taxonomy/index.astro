@@ -9,38 +9,75 @@ const categories = countTaxonomies(posts, (post) => post.data.category);
 const tags = countTaxonomies(posts, (post) => post.data.tags);
 ---
 
-<BaseLayout title="カテゴリ・タグの一覧" noindex={true}>
-  <h1>カテゴリ一覧</h1>
-  {
-    categories.length > 0 ? (
-      <ul>
-        {categories.map((cat) => (
-          <li>
-            <a href={`/taxonomy/category/${cat.slug}/`}>
-              {cat.name} ({cat.count})
-            </a>
-          </li>
-        ))}
-      </ul>
-    ) : (
-      <p>カテゴリがありません。</p>
-    )
+<BaseLayout noindex={true} title="カテゴリ・タグの一覧">
+  <div class="stack">
+    <h1>カテゴリ一覧</h1>
+    {
+      categories.length > 0 ? (
+        <ul>
+          {categories.map((cat) => (
+            <li>
+              <a href={`/taxonomy/category/${cat.slug}/`}>
+                {cat.name} ({cat.count})
+              </a>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>カテゴリがありません。</p>
+      )
+    }
+
+    <h1>タグ一覧</h1>
+    {
+      tags.length > 0 ? (
+        <ul>
+          {tags.map((tag) => (
+            <li>
+              <a href={`/taxonomy/tag/${tag.slug}/`}>
+                #{tag.name} ({tag.count})
+              </a>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>タグがありません。</p>
+      )
+    }
+  </div>
+</BaseLayout>
+
+<style lang="scss">
+  // layout
+  @property --stack-gap {
+    syntax: '<length>';
+    inherits: false;
+    initial-value: 24px;
   }
 
-  <h1>タグ一覧</h1>
-  {
-    tags.length > 0 ? (
-      <ul>
-        {tags.map((tag) => (
-          <li>
-            <a href={`/taxonomy/tag/${tag.slug}/`}>
-              #{tag.name} ({tag.count})
-            </a>
-          </li>
-        ))}
-      </ul>
-    ) : (
-      <p>タグがありません。</p>
-    )
+  .stack {
+    > * + * {
+      margin-top: var(--stack-gap, 1.5rem);
+    }
+
+    & h1 + * {
+      --stack-gap: 0.5rem;
+    }
   }
-</BaseLayout>
+</style>
+
+<style lang="scss">
+  // design
+  @use '../../styles/settings/variables' as *;
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    margin: 0;
+  }
+
+  li {
+    font-size: 110%;
+  }
+</style>
