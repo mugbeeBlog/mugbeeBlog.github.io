@@ -1,12 +1,12 @@
 ---
 import { getCollection, render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
 
 type Platform = 'youtube' | 'info';
-type PlatformColor = 'red' | 'gray';
 
 interface PlatformConfig {
   label: string;
-  color: PlatformColor;
+  color: string;
 }
 
 const PLATFORM_CONFIG: Record<Platform, PlatformConfig> = {
@@ -16,40 +16,46 @@ const PLATFORM_CONFIG: Record<Platform, PlatformConfig> = {
 
 const MAX_MESSAGES = 3;
 
-const calculateDaysDiff = (targetDate: Date, baseDate: Date): number => {
-  const target = new Date(targetDate);
-  const base = new Date(baseDate);
+const getRelativeDate = (date: Date): string => {
+  const now = new Date();
+  const target = new Date(date);
 
+  now.setHours(0, 0, 0, 0);
   target.setHours(0, 0, 0, 0);
-  base.setHours(0, 0, 0, 0);
 
-  return (base.getTime() - target.getTime()) / (1000 * 60 * 60 * 24);
-};
-
-const formatRelativeDate = (date: Date): string => {
-  const diffDays = calculateDaysDiff(date, new Date());
+  const diffDays = Math.floor(
+    (now.getTime() - target.getTime()) / (1000 * 60 * 60 * 24)
+  );
 
   if (diffDays === 0) return '今日';
   if (diffDays === 1) return '昨日';
   if (diffDays < 0) return '未来';
-  return `${Math.floor(diffDays)}日前`;
+  return `${diffDays}日前`;
 };
 
-const sortByDateDesc = <T extends { data: { date: Date } }>(
-  items: T[]
-): T[] => {
-  return [...items].sort(
+const sortByDate = (
+  messages: CollectionEntry<'messages'>[]
+): CollectionEntry<'messages'>[] => {
+  return [...messages].sort(
     (a, b) => b.data.date.getTime() - a.data.date.getTime()
   );
 };
 
 const messages = await getCollection('messages');
-const recentMessages = sortByDateDesc(messages).slice(0, MAX_MESSAGES);
+const recentMessages = sortByDate(messages).slice(0, MAX_MESSAGES);
 
 const renderedMessages = await Promise.all(
-  recentMessages.map(async (msg) => {
-    const { Content } = await render(msg);
-    return { data: msg.data, Content };
+  recentMessages.map(async (message) => {
+    const { Content } = await render(message);
+    const config = PLATFORM_CONFIG[message.data.platform];
+
+    return {
+      platform: message.data.platform,
+      date: message.data.date,
+      url: message.data.url,
+      label: config.label,
+      Content,
+    };
   })
 );
 ---
@@ -57,30 +63,30 @@ const renderedMessages = await Promise.all(
 {
   renderedMessages.length > 0 && (
     <ul>
-      {renderedMessages.map(({ data, Content }) => {
-        const config = PLATFORM_CONFIG[data.platform];
+      {renderedMessages.map(({ platform, date, url, label, Content }) => (
+        <li data-platform={platform}>
+          <span>{label}</span>
 
-        return (
-          <li class={`item item--${config.color}`}>
-            <span class={`badge badge--${config.color}`}>{config.label}</span>
+          <time
+            datetime={date.toISOString()}
+            title={date.toLocaleDateString('ja-JP', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            })}
+          >
+            {getRelativeDate(date)}
+          </time>
 
-            <time
-              datetime={data.date.toISOString()}
-              title={data.date.toISOString()}
-            >
-              {formatRelativeDate(data.date)}
-            </time>
-
-            {data.url ? (
-              <a href={data.url}>
-                <Content />
-              </a>
-            ) : (
+          {url ? (
+            <a href={url}>
               <Content />
-            )}
-          </li>
-        );
-      })}
+            </a>
+          ) : (
+            <Content />
+          )}
+        </li>
+      ))}
     </ul>
   )
 }
