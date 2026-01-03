@@ -29,21 +29,13 @@ const GTM_ID = import.meta.env.PUBLIC_GTM_ID;
     <Background />
 
     <div class="layout">
-      <div class="layout__section">
-        <Header />
-      </div>
+      <Header />
 
-      <div class="layout__section">
-        <slot />
-      </div>
+      <slot />
 
-      <div class="layout__section">
-        <slot name="recommend" />
-      </div>
+      <slot name="recommend" />
 
-      <div class="layout__section">
-        <Footer />
-      </div>
+      <Footer />
     </div>
   </body>
 </html>
