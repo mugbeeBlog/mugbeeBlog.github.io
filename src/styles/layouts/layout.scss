@@ -1,0 +1,16 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 740px;
+  margin: 2rem auto;
+}
+
+.layout__section {
+  padding: 1.5rem;
+  background-color: rgb(255 255 255 / 85%);
+  border-radius: 12px;
+  box-shadow:
+    0 8px 20px rgb(0 0 0 / 8%),
+    0 2px 4px rgb(0 0 0 / 4%);
+}
