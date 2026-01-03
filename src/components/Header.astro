@@ -8,9 +8,43 @@ const TitleTag = isTop ? 'h1' : 'p';
 ---
 
 <header>
-  <TitleTag class="title">
-    <a href="/">{site.title}</a>
-  </TitleTag>
+  <div class="stack">
+    <TitleTag class="title">
+      <a href="/">{site.title}</a>
+    </TitleTag>
 
-  <HeaderNav />
+    <div class="header-nav">
+      <HeaderNav />
+    </div>
+  </div>
 </header>
+
+<style lang="scss">
+  // Stack component
+  @property --stack-gap {
+    syntax: '<length>';
+    inherits: false;
+    initial-value: 24px;
+  }
+
+  .stack > * + * {
+    margin-top: var(--stack-gap, 1.5em);
+  }
+</style>
+
+<style lang="scss">
+  // design
+  @use '../styles/settings/variables' as *;
+
+  .title {
+    font-family: $font-body;
+    font-size: 180%;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .title a {
+    color: inherit;
+    text-decoration: none;
+  }
+</style>
