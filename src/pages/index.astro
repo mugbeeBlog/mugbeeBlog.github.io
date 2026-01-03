@@ -12,8 +12,11 @@ const lastPage = Math.ceil(blogs.length / pagination.pageSize);
 ---
 
 <BaseLayout description={site.description}>
-  <main>
-    <ArticleCard blogs={firstPageBlogs} />
+  <main class="stack">
+    <div class="article-card">
+      <ArticleCard blogs={firstPageBlogs} />
+    </div>
+
     {
       lastPage > 1 && (
         <div class="pagination">
@@ -23,3 +26,15 @@ const lastPage = Math.ceil(blogs.length / pagination.pageSize);
     }
   </main>
 </BaseLayout>
+
+<style lang="scss">
+  @property --stack-gap {
+    syntax: '<length>';
+    inherits: false;
+    initial-value: 24px;
+  }
+
+  .stack > * + * {
+    margin-top: var(--stack-gap, 1.5rem);
+  }
+</style>
