@@ -6,13 +6,16 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "gc": "git-cz"
   },
   "dependencies": {
-    "@astrojs/mdx": "^4.3.13",
     "@astrojs/rss": "^4.0.15",
     "@astrojs/sitemap": "^3.7.0",
     "astro": "^5.16.11",
     "sharp": "^0.34.3"
+  },
+  "devDependencies": {
+    "git-cz": "^4.9.0"
   }
 }
