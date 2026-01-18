@@ -26,7 +26,7 @@ jobs:
         with:
           node-version: 20
         env:
-          PUBLIC_GTM_ID: ${{ secrets.PUBLIC_GTM_ID }}
+          PUBLIC_GTM_ID: ${{ vars.PUBLIC_GTM_ID }}
 
   deploy:
     needs: build
