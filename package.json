@@ -21,6 +21,8 @@
   },
   "devDependencies": {
     "cspell": "^9.6.0",
-    "git-cz": "^4.9.0"
+    "git-cz": "^4.9.0",
+    "prettier": "^3.8.0",
+    "prettier-plugin-astro": "^0.14.1"
   }
 }
