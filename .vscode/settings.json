@@ -2,10 +2,25 @@
   "files.associations": {
     "*.astro": "astro"
   },
+
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
+
   "emmet.includeLanguages": {
     "astro": "html"
   },
+
+  "eslint.useFlatConfig": true,
+  "eslint.workingDirectories": [{ "mode": "auto" }],
+  "eslint.validate": ["javascript", "typescript", "astro"],
+
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll.stylelint": "explicit"
+  },
+
+  "stylelint.validate": ["css", "scss", "html", "astro"],
+  "stylelint.configFile": "stylelint.config.mjs",
+
   "svg.preview.mode": "svg"
 }
