@@ -25,10 +25,6 @@ export default [
     files: ["**/*.{ts,mts,cts}"],
     ignores: ["eslint.config.ts"],
     languageOptions: {
-      parserOptions: {
-        project: "./tsconfig.json",
-        tsconfigRootDir: import.meta.dirname,
-      },
       globals: {
         ...globals.node,
       },
