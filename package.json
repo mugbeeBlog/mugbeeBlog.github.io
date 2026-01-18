@@ -11,7 +11,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "gc": "git-cz",
-    "cspell": "cspell lint '**' --no-progress"
+    "cspell": "cspell lint \"**\" --no-progress"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.15",
